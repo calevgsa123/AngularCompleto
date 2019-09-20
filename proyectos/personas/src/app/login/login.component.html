@@ -1,0 +1,5 @@
+<form #f="ngForm" (ngSubmit)="f.form.valid && login(f)">
+    <input name="email" type="email" ngModel required size="20" />
+    <input name="password" type="password" ngModel required size="15" />
+    <button type="submit">Login</button>
+</form>

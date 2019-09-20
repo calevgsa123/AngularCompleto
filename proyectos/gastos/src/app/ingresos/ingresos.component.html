@@ -1,0 +1,9 @@
+<div class="page-header">
+    <h3>Ingresos</h3>
+</div>
+<table class="table table-striped">
+    <tr><th>Consepto</th><th>Monto</th></tr>
+    <app-ingreso *ngfor="let ingresoO of ingresosV"
+    [ingreso]="ingresoO"
+    ></app-ingreso>
+</table>

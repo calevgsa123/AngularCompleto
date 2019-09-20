@@ -1,0 +1,11 @@
+<div class="page-header">
+    <h3>Egresos</h3>
+</div>
+<table class="table table-striped">
+    <tr><th>Consepto</th><th>Monto</th><th>Quitar</th></tr>
+    <tr *ngFor="let egreso of egresos; let indice = index">
+        <td>{{egreso.consepto}}</td>
+        <td>{{egreso.monto}}</td>
+        <td><button value={{indice}} (click)="onEliminarEgreso($event)">-</button></td>
+    </tr>
+</table>

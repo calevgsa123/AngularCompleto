@@ -1,0 +1,8 @@
+<button (click)="onAgregar()">Agregar</button>
+  <div >
+    <app-persona *ngFor="let personaArray of personas; let i = index"
+    [persona]="personaArray"
+    [index]="i"
+    ></app-persona>
+  </div> 
+  <router-outlet></router-outlet>

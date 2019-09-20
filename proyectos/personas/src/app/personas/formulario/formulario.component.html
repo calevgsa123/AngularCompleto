@@ -1,0 +1,7 @@
+<form #f="ngForm" (ngSubmit)="f.form.valid && onAgregarPersona()">
+  <input type="text" name="nombre" [(ngModel)]="nombrePersona" placeholder="Nombre" required>
+  <input type="text" name="apellido" [(ngModel)]="apellidoPersona" placeholder="Apellido" required>
+  <button type="submit">Agregar</button>
+  <button *ngIf="modoEdicion ==1" (click)="onBorrarPersona()">Borar</button>
+</form>
+<!--nombrePresona, apellidoPersona-->

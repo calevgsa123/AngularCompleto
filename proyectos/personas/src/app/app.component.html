@@ -1,0 +1,5 @@
+<a *ngIf="!isAutenticado()" routerLink ="/login">Login</a>
+<a *ngIf="isAutenticado()" style="cursor: pointer" (click)="salir()">Salir</a>
+<router-outlet></router-outlet>
+
+

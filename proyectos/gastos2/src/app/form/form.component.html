@@ -1,0 +1,11 @@
+<div class="container">
+    <form class="form-inline">
+        <select name="selectAccion" id="selectAccion" [(ngModel)]="slectChoose" class="form-control">
+            <option value="ingreso" [defaultSelected]="true">+</option>
+            <option value="egreso">-</option>
+        </select>
+        <input type="text" name="consepto" class="form-control" [(ngModel)]="conseptoInput" placeholder="Consepto">
+        <input type="number" name="monto" class="form-control" [(ngModel)]="montoInput" placeholder="Monto">
+        <button type="button" (click)="agregarIngreso()">Add</button>
+    </form>
+</div>
