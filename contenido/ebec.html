@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Titulo</title>
+<link rel="stylesheet"  type="text/css" href="../css/bootstrap-4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet"  type="text/css" href="../css/style.css" />
+<script src="../js/jquery/jquery-3.1.1.min.js"></script>
+<script src="../css/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+<style>
+</style>
+</head>
+
+<body class="body-contenido">
+<h2>Event binding entre componentes</h2>
+<p>Para mandar funciones entre componentes utilizamos este método primero tenemos que crear un nuevo componentes llamado formulario y mover ahí el formulario</p>
+<h3>formulario.component.html:</h3>
+<pre>
+&lt;form>
+    &lt;input type="text" name="nombre" [(ngModel)]="nombrePersona" placeholder="Nombre">
+    &lt;input type="text" name="apellido" [(ngModel)]="apellidoPersona" placeholder="Apellido">
+    &lt;button (click)="onAgregarPersona()">Agregar&lt;/button>
+&lt;/form>
+</pre>
+<h3>formulario.component.ts</h3>
+<pre>
+import { Component, OnInit, Output, <span class="resaltado">EventEmitter</span> } from '@angular/core';
+import { persona } from '../persona.model';
+
+@Component({
+  selector: 'app-formulario',
+  templateUrl: './formulario.component.html',
+  styleUrls: ['./formulario.component.css']
+})
+export class FormularioComponent implements OnInit {
+  <span class="resaltado">@Output()personaCreada = new EventEmitter&lt;persona>();</span>
+  nombrePersona:string;
+  apellidoPersona:string;
+  
+  constructor() { }
+
+  ngOnInit() {
+  }
+  onAgregarPersona(){
+    <span class="resaltado">this.personaCreada.emit(new persona(this.nombrePersona,this.apellidoPersona))</span>
+  }
+}
+</pre>
+<p>Se traslada del componente app.component.ts las variables string que se utilizan como ngModel en los controles input. Creamos un decorador de salida para poder mandar el objeto persona creado del componente hijo al padre y lo emitimos en el método onAgregarPersona(no olvides importar el componente EventEmitter de angular/core)</p>
+<h3>app.component.html</h3>
+<pre>
+<span class="resaltado">&lt;app-formulario (personaCreada)="onPersonaAgregada($event)">&lt;/app-formulario></span>
+  &lt;div >
+    &lt;app-persona *ngFor="let personaArray of personas; let i = index"
+    [persona]="personaArray"
+    [index]="i"
+    >&lt;/app-persona>
+  &lt;/div> 
+</pre>
+<p>Se agrega en el componente principal el control del formulario y declaramos la función que se estará monorizando enlazando la con otro método que se creara en el ts del componente principal</p>
+<h3>app.component.ts</h3>
+<pre>
+import { Component } from '@angular/core';
+import {persona} from './persona.model';
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  titulo = 'Lista de personas';
+  personas:persona[] = [new persona("Veronica","Hernandez"), new persona("Gisela", "Perez")];
+  
+  <span class="resaltado">onPersonaAgregada(event:persona){
+    this.personas.push(event);
+  }</span>
+}
+
+</pre>
+</body>
+</html>

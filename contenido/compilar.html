@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Titulo</title>
+<link rel="stylesheet"  type="text/css" href="../css/bootstrap-4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet"  type="text/css" href="../css/style.css" />
+<script src="../js/jquery/jquery-3.1.1.min.js"></script>
+<script src="../css/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+<style>
+</style>
+</head>
+
+<body class="body-contenido">
+<h2>Compilar</h2>
+<p>El proyecto asi como lo tenemos no se puede subir a un servidor web hay que compilarlo y para eso usamos la terminal</p>
+<div class="consola">
+	>ng build --prod --aot
+</div>
+<p>Talvez hay que modificar el archivo index.html la parte de &lt;base href="/"> esto es donde se va a ejecutar el servidor, si va ser en raiz esta bien, pero si va a ser dentro de otra carpetahay que poner una referencia local &lt;base href="./"></p>
+<h3>index.html</h3>
+<pre>
+&lt;!doctype html>
+&lt;html lang="en">
+&lt;head>
+  &lt;meta charset="utf-8">
+  &lt;title>Personas&lt;/title>
+ <span class="resaltado"> &lt;base href="/"></span>
+
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1">
+  &lt;link rel="icon" type="image/x-icon" href="favicon.ico">
+&lt;link rel="stylesheet" href="styles.3ff695c00d717f2d2a11.css">&lt;/head>
+&lt;body>
+  &lt;app-root>&lt;/app-root>
+&lt;script src="runtime-es2015.27965c48d77c449cb93c.js" type="module">&lt;/script>
+&lt;script src="polyfills-es2015.9aaba84b721d907ae919.js" type="module">&lt;/script>
+&lt;script src="runtime-es5.ee2dcdf2e59a31c9da78.js" nomodule defer>&lt;/script>
+&lt;script src="polyfills-es5.a5ec2c5f9c4a8eba6d56.js" nomodule defer>&lt;/script>
+&lt;script src="main-es2015.0a5c27540562af851c5c.js" type="module">&lt;/script>
+&lt;script src="main-es5.d88a531ab21417124c51.js" nomodule defer>&lt;/script>
+&lt;/body>
+&lt;/html>
+</pre>
+</body>
+</html>

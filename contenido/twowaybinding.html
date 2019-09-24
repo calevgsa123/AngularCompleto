@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Titulo</title>
+<link rel="stylesheet"  type="text/css" href="../css/bootstrap-4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet"  type="text/css" href="../css/style.css" />
+<script src="../js/jquery/jquery-3.1.1.min.js"></script>
+<script src="../css/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+<style>
+</style>
+</head>
+
+<body class="body-contenido">
+<h2>Two way binding</h2>
+<p>Con el event binding podemos hacer que el control mande información al ts pero no lo contrario con two way binding podemos hacer que estén sincronizada una variable con el contenido del input</p>
+<p>Primero tenemos que modificar el archivo app.module.ts, importando FormsModules y lo mismo en el import</p>
+<h3>app.module.ts:</h3>
+<pre>
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+<span class="resaltado">import {FormsModule} from '@angular/forms';</span>
+
+import { AppComponent } from './app.component';
+import { PersonasComponent } from './personas/personas.component';
+import { PersonaComponent } from './persona/persona.component';
+
+
+@NgModule({
+  declarations: [
+    AppComponent, PersonasComponent, PersonaComponent
+  ],
+  imports: [
+    BrowserModule,<span class="resaltado">FormsModule</span>
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+</pre>
+<p>Ahora agregamos ngModel entre corechetes y parentesis</p>
+<h3>app-component.html</h3>
+<pre>&lt;input type="text" [(ngModel)]="inputAsociado">
+	&lt;p>{{inputAsociado}}&lt;/p>
+</pre>
+<h3>app.module.ts:</h3>
+<pre>
+import {Component} from '@angular/core';
+
+@Component({
+    selector: 'app-personas',
+    templateUrl: './personas.component.html'
+})
+
+export class PersonasComponent{
+    inputAsociado="Hola mundo";
+}
+</pre>
+</body>
+</html>

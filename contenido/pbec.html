@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Titulo</title>
+<link rel="stylesheet"  type="text/css" href="../css/bootstrap-4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet"  type="text/css" href="../css/style.css" />
+<script src="../js/jquery/jquery-3.1.1.min.js"></script>
+<script src="../css/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+<style>
+</style>
+</head>
+
+<body class="body-contenido">
+<h2>Property binding entre componentes</h2>
+<p>Esto sirve para mandar datos entre componente de padre a hijo</p>
+<h3>app.component.html</h3>
+<pre>
+&lt;app-persona *ngFor="let personaArray of personas; let i = index"
+<span class="resaltado">[persona]="personaArray"</span>
+<span class="resaltado">[index]="i"</span>
+>&lt;/app-persona>
+</pre>
+<p>Usamos el property binding para pasar el arreglo de persona por la propiedad persona y la varialbe i para pasar el indice</p>
+<h3>persona.component.ts</h3>
+<pre>
+import { Component, OnInit, Input } from '@angular/core';
+import { persona } from '../persona.model';
+
+@Component({
+  selector: 'app-persona',
+  templateUrl: './persona.component.html',
+  styleUrls: ['./persona.component.css']
+})
+export class PersonaComponent  {
+<span class="resaltado">@Input()persona:persona;</span>
+<span class="resaltado">@Input()index:number;</span>
+}
+</pre>
+<p>Devemos agregar el componente input en el import</p>
+<h3>persona.component.html</h3>
+<pre>&lt;p>{{index+1}}.- {{persona.nombre}} {{persona.apellido}}&lt;/p></pre>
+</body>
+</html>

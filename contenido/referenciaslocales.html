@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Titulo</title>
+<link rel="stylesheet"  type="text/css" href="../css/bootstrap-4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet"  type="text/css" href="../css/style.css" />
+<script src="../js/jquery/jquery-3.1.1.min.js"></script>
+<script src="../css/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+<style>
+</style>
+</head>
+
+<body class="body-contenido">
+<h2>Referencias locales</h2>
+<p>Las referencias locales son muy similares al two way binding. Primero ponemos una referencia al control empezando por el signo de # y lo mandamos por parámetros a la funcion</p>
+<h3>formulario.component.html</h3>
+<pre>
+&lt;form>
+    &lt;input type="text" name="nombre" <span class="resaltado">#nombrePresona</span> placeholder="Nombre">
+    &lt;input type="text" name="apellido" [(ngModel)]="apellidoPersona" placeholder="Apellido">
+    &lt;button <span class="resaltado">(click)="onAgregarPersona(nombrePersona)"</span>>Agregar&lt;/button>
+&lt;/form>
+</pre>
+<h3>formulario.component.ts</h3>
+<pre>
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { persona } from '../persona.model';
+
+@Component({
+  selector: 'app-formulario',
+  templateUrl: './formulario.component.html',
+  styleUrls: ['./formulario.component.css']
+})
+export class FormularioComponent implements OnInit {
+  @Output()personaCreada = new EventEmitter&lt;/persona>();
+  nombrePersona:string;
+  apellidoPersona:string;
+  
+  constructor() { }
+
+  ngOnInit() {
+  }
+  <span class="resaltado">onAgregarPersona(nombrePersona:HTMLInputElement){
+    this.personaCreada.emit(new persona(nombrePersona.value,this.apellidoPersona))
+  }</span>
+}
+</pre>
+<p>En los parametros de la función agregamos el nombre del parámetro y el tipo de parámetro y reemplazamos donde usábamos la variable nombrePersona por el parámetro nombrePersona y como manda el control completo accedemos a el atributo value</p>
+</body>
+</html>

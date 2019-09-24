@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Titulo</title>
+<link rel="stylesheet"  type="text/css" href="../css/bootstrap-4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet"  type="text/css" href="../css/style.css" />
+<script src="../js/jquery/jquery-3.1.1.min.js"></script>
+<script src="../css/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+<style>
+</style>
+</head>
+
+<body class="body-contenido">
+<h2>Crear un componente manual</h2>
+<p>Para crear un componente manual tenemos que hacer cada uno de los arhcivos nosotros mismos ademas de declarar el nuevo componente</p>
+<ol>
+    <li>Creamos un folder con el nombre del componente en "src/app"</li>
+    <li>creamos un archivo dentro de ese folder con el nombre personas.component.ts
+        <pre>
+            import {Component} from '@angular/core';
+            @Component({
+                selector: 'app-personas',//Nombre que usaremos en html se recomienda usar app- devemos poner atencion a que el nombre no se repita
+                templateUrl: './personas.component.html',//archivo html
+            export class PersonasComponent{
+            }
+        </pre>
+    </li>
+    <li></li>
+</ol>
+<h1>Incompleto corregir</h1>
+</body>
+</html>

@@ -12,9 +12,19 @@
 </head>
 
 <body class="body-contenido">
-<h2></h2>
-<p></p>
+<h2>Directiva *ngIf</h2>
+<p>Con esta directiva podemos hacer que un componente sea visible o no</p>
 <pre>
+	&lt;p *ngIf="click">{{mensajeAgregarPersona}}&lt;/p>
 </pre>
+<p>click es una variable booleana, ahora vamos a ver como usar el else</p>
+<pre>
+&lt;p *ngIf="disteClick; else sinPersona">{{mensajeAgregarPersona}}&lt;/p>
+    &lt;ng-template #sinPersona>
+        &lt;p>No se ha agregado ninguna persona&lt;/p>
+    &lt;/ng-template>
+
+</pre>
+<p>En este caso se mostraría el control ng-template mientras el valor de disteClick sea false</p>
 </body>
 </html>

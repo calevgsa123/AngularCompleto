@@ -12,9 +12,28 @@
 </head>
 
 <body class="body-contenido">
-<h2></h2>
-<p></p>
+<h2>Event binding para un input</h2>
+<p>Vamos a trabajar con event binding con un input, usando el valor que tenga escrito</p>
+<h3>app-component.html</h3>
 <pre>
+	&lt;input type="text" (input)="onEscribirInput($event)">
+</pre>
+<p>En la funcion enviamos como parametro</p>
+<h3>app-component-ts</h3>
+<pre>
+import {Component} from '@angular/core';
+
+@Component({
+    selector: 'app-personas',
+    templateUrl: './personas.component.html'
+})
+
+export class PersonasComponent{
+    inputText:string="";
+    onEscribirInput(event: Event){
+        this.inputText=(&lt;HTMLInputElement>event.target).value;
+    }
+}
 </pre>
 </body>
 </html>

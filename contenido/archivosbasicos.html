@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Titulo</title>
+<link rel="stylesheet"  type="text/css" href="../css/bootstrap-4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet"  type="text/css" href="../css/style.css" />
+<script src="../js/jquery/jquery-3.1.1.min.js"></script>
+<script src="../css/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+<style>
+</style>
+</head>
+
+<body class="body-contenido">
+<h2>Archivos basicos</h2>
+<p>A la hora de crear el primer proyecto se crean a su ves varios archivos basicos para que angular funcione, ellos son:</p>
+<h3>app.component.ts</h3>
+<p>Este es el archivo TypeScript donde va el codigo de nuesta componente app.component.html</p>
+<pre>
+import { Component } from '@angular/core';//Se importa el componente core de angular
+
+@Component({//Decorador con los datos del componente
+    selector: 'app-root', //nombre del selector con el que se llamara el control
+    templateUrl: './app.component.html',//template html osea la pagina que interactuara con el codigo
+    styleUrls: ['./app.component.css']//Estilos de la pagina
+})
+export class AppComponent {//Se exporta la clase
+    title = 'Hola mundo desde Angular';//Propiedad declarada
+}   
+</pre>
+
+<h3>app.component.html</h3>
+<p>Este es el archivo de tipo html donde se escribe todo lo visual y de donde se llaman los componentes</p>
+<pre>
+ &lt;p>{{title}}&lt;/p> //Aqui usamos la interpolacion que ponemos entre llaves la propiedad y se imp´rime en el navegador
+</pre>
+
+<h2>app.module.ts</h2>
+<p>Este archivo guarda los recursos del proyecto y es donde se configuran y declaran componentes, proveddores, y demas herramientas para trabajar como el proyecto valla avanzando se este archivo ira creciendo</p>
+<pre>
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppComponent } from './app.component';
+import { PersonasComponent } from './personas/personas.component';
+
+@NgModule({
+    declarations: [
+    AppComponent, PersonasComponent
+    ],
+    imports: [
+    BrowserModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
+})
+export class AppModule { }
+        
+</pre>
+
+<h2>index.html</h2>
+<p>Es el archivo principal donde se va a mostrar todo tanco componentes como demas objetos y configuracion</p>
+<pre></pre>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Titulo</title>
+<link rel="stylesheet"  type="text/css" href="../css/bootstrap-4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet"  type="text/css" href="../css/style.css" />
+<script src="../js/jquery/jquery-3.1.1.min.js"></script>
+<script src="../css/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+<style>
+</style>
+</head>
+
+<body class="body-contenido">
+<h2>Parametros en la ruta</h2>
+<p>Vamos a crear un ancla con los parámetros que despues recibiremos</p>
+<h3>Personas.component.html</h3>
+<pre>
+&lt;a [routerLink]="['/personas',index]">elemento 1&lt;/a>
+</pre>
+<p>Ahora vamos a utilizar ese parámetro que se recibió</p>
+<h3>Formulario.component.ts</h3>
+<pre>
+<span class="resaltado">import { Router, ActivatedRoute } from '@angular/router';</span>
+
+...
+export class FormularioComponent implements OnInit {
+  nombrePersona:string;
+  apellidoPersona:string;
+  index:number;
+
+  constructor(private PersonasService:PersonasService,
+    private router: Router,
+    <span class="resaltado">private route: ActivatedRoute</span>) { 
+    this.PersonasService.personaIndice.subscribe((indice:number) => alert("El indice es: " + indice));
+  }
+
+  ngOnInit() {
+    this.index = <span class="resaltado">this.route.snapshot.params['id'];</span>
+    }
+</pre>
+<p>
+Recordar que el nombre de id se asigna en el archivo de rauting y aunque se declare como number asigna un valor string hay que usar Number.isNaN
+</p>
+<h3>app-routing.module.ts</h3>
+<pre>
+import ...
+
+const routes: Routes = [
+  { path: '', component: PersonasComponent },
+  { path: 'personas', component: PersonasComponent },
+  { path: 'agregar', component: FormularioComponent },
+  { path: 'personas/<span class="resaltado">:id</span>', component: FormularioComponent}
+]
+
+@NgModule({
+  imports: [RouterModule.forRoot(
+    routes
+  )
+  ]
+})
+export class AppRoutingModule { }
+
+</pre>
+</body>
+</html>

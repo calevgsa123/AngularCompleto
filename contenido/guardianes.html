@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Titulo</title>
+<link rel="stylesheet"  type="text/css" href="../css/bootstrap-4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet"  type="text/css" href="../css/style.css" />
+<script src="../js/jquery/jquery-3.1.1.min.js"></script>
+<script src="../css/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+<style>
+</style>
+</head>
+
+<body class="body-contenido">
+<h2>Guardianes</h2>
+<p>Los guardianes sirve para evitar que un usuario ingrese a una dirección sin estar autenticado</p>
+<p>Primero creamos un nuevo servicio</p>
+<h3>login-guardian.ts</h3>
+<pre>
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { LoginService } from './login.service';
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class LoginGuardian implements CanActivate{
+
+    constructor(private LoginService: LoginService, private router: Router){}
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot){
+      if(this.LoginService.isAutenticado()){
+          return true;
+      }else{
+          this.router.navigate(['login']);
+          return false;
+      }
+    }
+}
+
+</pre>
+<p>Modificamos el routing</p>
+<h3>app-routing.module.ts</h3>
+<pre>
+const routes: Routes = [
+  { path: '', component: PersonasComponent, <span class="resaltado">canActivate:[LoginGuardian]</span> },
+  { path: 'personas', component: PersonasComponent, <span class="resaltado">canActivate:[LoginGuardian]</span>	 ,children: [
+    { path: 'agregar', component: FormularioComponent },
+    { path: ':id', component: FormularioComponent },
+  ]},
+  { path: 'login', component: LoginComponent },
+  { path: '**', component: ErrorComponent }
+]
+
+</pre>
+</body>
+</html>

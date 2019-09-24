@@ -12,9 +12,16 @@
 </head>
 
 <body class="body-contenido">
-<h2></h2>
-<p></p>
+<h2>Query params</h2>
+<p>para pasar parámetros por la url debemos declararlos en el &lt;a> </p>
+<h3>html</h3>
 <pre>
+&lt;a 
+[routerLink]="['/personas',index]"
+[queryParams]="{modoEdicion: '1'}">Link&lt;/a>
 </pre>
+<h3>ts</h3>
+<pre>this.modoEdicion = +this.route.snapshot.queryParams['modoEdicion'];</pre>
 </body>
+<p>Aquí le asigna a la variable modoEdicion el valor del parámetro modoEdicion y al agregarle el símbolo + la convierte en number</p>
 </html>

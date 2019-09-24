@@ -12,9 +12,32 @@
 </head>
 
 <body class="body-contenido">
-<h2></h2>
-<p></p>
+<h2>Event binding</h2>
+<p>Este es similar al property binding pero para eventos, en este caso ponemos el nombre del evento entre parentesis</p>
+<h3>app-component.html</h3>
 <pre>
+&lt;button
+    (click)="onClickBoton()"
+    >Agregar persona&lt;/button>
+</pre>
+<h3>app-component-ts</h3>
+<pre>
+import {Component} from '@angular/core';
+
+@Component({
+    selector: 'app-personas',
+    templateUrl: './personas.component.html'
+})
+
+export class PersonasComponent{
+    agregarPersona=false;
+    mensaje="No se ha dado click";
+
+    onClickBoton (){
+        this. mensaje ="Diste click";
+    }
+}
+
 </pre>
 </body>
 </html>

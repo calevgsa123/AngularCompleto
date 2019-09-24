@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Titulo</title>
+<link rel="stylesheet"  type="text/css" href="../css/bootstrap-4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet"  type="text/css" href="../css/style.css" />
+<script src="../js/jquery/jquery-3.1.1.min.js"></script>
+<script src="../css/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+<style>
+</style>
+</head>
+
+<body class="body-contenido">
+<h2>Guardar los datos en una base de datos</h2>
+<p>En este caso usaremos firebase</p>
+<p>Primero debemos crear la bases de datos de firebise en modo realtimedatabase(<a href="https://firebase.google.com/">firebase.google.com</a>) y habilitar las funciones de escritura y lectura si sale el error 401 de no autorizado para escribir</p>
+<p>Luego creamos un nuevo servicio para que se conecte con la base de datos</p>
+<h3>data.service.ts</h3>
+<pre>
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { persona } from './persona.model';
+
+@Injectable()
+export class DataServices{
+    constructor(private HttpCliente: HttpClient){}
+
+    guardarPersona(personas: persona[]){
+        this.HttpCliente.put('https://listado-personas-ad186.firebaseio.com/datos.json', personas)
+        .subscribe(
+            response => console.log("Persona agregada " + response),
+            error => console.log("Error al guardar: " + error)
+        );
+    }
+}
+</pre>
+<p>La coneccion debe terminar siempre con .json</p>
+<h3>app.module.ts</h3>
+<pre><span class="resaltado">import { HttpClientModule } from '@angular/common/http';</span>
+
+@NgModule({
+  imports: [
+    BrowserModule, FormsModule, AppRoutingModule,RouterModule,<span class="resaltado">HttpClientModule</span>
+export class AppModule { }
+</pre>
+<p>En este archivo agregamos el httpclientmodule y lo agregamos a los imports</p>
+<h3>Base de datos de firebase</h3>
+<img src="../archivos/basededatos.png">
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Titulo</title>
+<link rel="stylesheet"  type="text/css" href="../css/bootstrap-4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet"  type="text/css" href="../css/style.css" />
+<script src="../js/jquery/jquery-3.1.1.min.js"></script>
+<script src="../css/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+<style>
+</style>
+</head>
+
+<body class="body-contenido">
+<h2>Comunicación entre componentes utilizando un servicio</h2>
+<p>Podemos comunicarnos entre componentes utilizando un servicio y asi nos ahorramos código, vamos a usar un boton para saber que indice tiene los elementos del array que ya imprimimos</p>
+<h3>persona.component.html</h3>
+<pre>
+	&tl;div>{{index+1}}.- {{persona.nombre}} {{persona.apellido}} &tl;button type="submit" (click)="onSaberIndice()">Indice&tl;/button>&tl;/div>
+</pre>
+<p>Agregamos la función en el ts y la asociamos con un objeto de tipo EventEmitter</p>
+<h3>persona.component.ts</h3>
+<pre>
+	...
+onSaberIndice(){
+  this.PersonasService.personaIndice.emit(this.index);
+}
+</pre>
+<p>En el servicio creamos el EventEmitter</p>
+<h3>PersonasService.service.ts</h3>
+<pre>
+import { persona } from './persona.model';
+import { LoggingService } from './LoggingService.service';
+import { Injectable, <span class="resaltado">EventEmitter</span> } from '@angular/core';
+
+@Injectable()
+export class PersonasService{
+  personas:persona[] = [new persona("Veronica","Hernandez"), new persona("Briseida", "Perez")];
+  <span class="resaltado">personaIndice = new EventEmitter&lt;number>();</span>
+  constructor (private LoggingService:LoggingService){}
+  onPersonaAgregada(event:persona){
+    this.LoggingService.imprimirMensaje("Persona agregada " + event.nombre);
+    this.personas.push(event);
+  }
+}
+</pre>
+<p>Nos suscribimos al evento que va a ser llamado</p>
+<h3>formulario.component.ts</h3>
+<pre>
+	...
+constructor(private LoggingService:LoggingService,<span class="resaltado">private PersonasService:PersonasService</span>) { 
+  <span class="resaltado">this.PersonasService.personaIndice.subscribe((indice:number) => alert("El indice es: " + indice));</span>
+}
+</pre>
+</body>
+</html>

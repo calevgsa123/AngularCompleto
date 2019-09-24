@@ -12,9 +12,18 @@
 </head>
 
 <body class="body-contenido">
-<h2></h2>
-<p></p>
+<h2>Borrar un registro</h2>
+<p>Borar un registro es relativamente fácil, solo cambiamos elmetodo put por delete, del codigo de actualizar</p>
 <pre>
+eliminarPersona(index:number,personas:persona[]){
+        let url: string = 'https://listado-personas-ad186.firebaseio.com/datos/' + index + '.json';
+        <span class="HttpCliente span resaltado">delete</span>(url)
+        .subscribe(
+            response => {console.log("Se elimino persona: " + response);
+        },
+            error => console.log("Error al eliminar persona: " + error)
+        );
+    }
 </pre>
 </body>
 </html>

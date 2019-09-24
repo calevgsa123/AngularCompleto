@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Titulo</title>
+<link rel="stylesheet"  type="text/css" href="../css/bootstrap-4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet"  type="text/css" href="../css/style.css" />
+<script src="../js/jquery/jquery-3.1.1.min.js"></script>
+<script src="../css/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+<style>
+</style>
+</head>
+
+<body class="body-contenido">
+<h2>Rutas (routing)</h2>
+<p>Vamos a crear una pagina con varias rutas para esto debemos crear un modulo con la terminal</p>
+<div class="consola">>ng g module app-routing</div>
+<p>Devemos agregar el modulo a el archivoapp.module.ts</p>
+<h3>app.module.ts</h3>
+<pre>
+	...
+<span class="resaltado">import { AppRoutingModule } from './app-routing.module';</span>
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    PersonaComponent,
+    FormularioComponent
+  ],
+  imports: [
+    BrowserModule, FormsModule, <span class="resaltado">AppRoutingModule</span>
+  ],
+  providers: [LoggingService,PersonasService],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+</pre>
+<p>Ahora devemos configurar el modulo que acabamos de crear</p>
+<h3>app-routing.module.ts</h3>
+<pre>
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule} from '@angular/router';
+import { FormularioComponent } from './personas/formulario/formulario.component';
+import { PersonasComponent } from './personas/personas.component';
+
+const routes: Routes = [
+  { path: '', component: PersonasComponent },
+  { path: 'personas', component: PersonasComponent },
+  { path: 'agregar', component: FormularioComponent },
+  { path: 'personas/:id', component: FormularioComponent}
+]
+
+@NgModule({
+  imports: [RouterModule.forRoot(
+    routes
+  )
+  ]
+})
+export class AppRoutingModule { }
+</pre>
+<p>Para poder usar rutas en nuestro proyecto devemos inportar el router en el modulo principal app.module.ts </p>
+<h3>app.module.ts</h3>
+<pre>
+	...
+<span class="resaltado">import { RouterModule } from '@angular/router';</span>
+	...
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    PersonaComponent,
+    FormularioComponent,
+    PersonasComponent
+  ],
+  imports: [
+    BrowserModule, FormsModule, AppRoutingModule,<span class="resaltado">RouterModule</span>
+  ],
+  providers: [LoggingService,PersonasService],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+</pre>
+<p>En el app.component.html vamos a cambiar el componente que muestra por el routin que dara paso a los componentes según la ruta</p>
+<h3>app.component.html</h3>
+<pre>&lt;router-outlet>&lt;/router-outlet></pre>
+<p>Esta ultima linea que agregamos funciona gracias al RouterModule  que agregamos en el archvio app.module.ts</p>
+<h1>Redireccionamiento con router</h1>
+<p>Ya creado y configurado el archivo de rauting vamos a hacer el enrutamiento</p>
+<p>Primero declaramos el router en el import y despues llamamos el metodo navigate para hacer el enrutamiento</p>
+<h3>persona.component.ts</h3>
+<pre>
+import { Component, OnInit } from '@angular/core';
+import { persona } from '../persona.model';
+import { PersonasService } from '../PersonasService.service';
+<span class="resaltado">import { Router } from '@angular/router';</span>
+
+@Component({
+  selector: 'app-personas',
+  templateUrl: './personas.component.html',
+  styleUrls: ['./personas.component.css']
+})
+export class PersonasComponent implements OnInit {
+
+  personas:persona[]=[];
+
+  constructor(private PersonasService:PersonasService,
+    <span class="resaltado">private router:Router</span>){}
+  ngOnInit(): void {
+   this.personas =  this.PersonasService.personas;
+  }
+  onAgregar(){
+    <span class="resaltado">this.router.navigate(['personas/agregar']);</span>
+  }
+}
+</pre>
+</body>
+</html>

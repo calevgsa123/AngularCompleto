@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Titulo</title>
+<link rel="stylesheet"  type="text/css" href="../css/bootstrap-4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet"  type="text/css" href="../css/style.css" />
+<script src="../js/jquery/jquery-3.1.1.min.js"></script>
+<script src="../css/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+<style>
+</style>
+</head>
+
+<body class="body-contenido">
+<h2>Interpolacion</h2>
+<p>El consepto de interpolacion es cuando usamos el valor de una variable para imprimirlo en la pagina</p>
+<h3>app.component.ts</h3>
+<pre>
+import { Component } from '@angular/core';//Se importa el componente core de angular
+
+@Component({ //Decorador con los datos del componente
+  selector: 'app-root', //nombre del selector con el que se llamara el control
+  templateUrl: './app.component.html',//template html osea la pagina que interactuara con el codigo
+  styleUrls: ['./app.component.css'] //Estilos de la pagina
+})
+export class AppComponent {//Se exporta la clase
+  title = 'Hola mundo desde Angular'; //Propiedad declarada
+}
+</pre>
+<p>La propiedad title sera la que usaremos para imprimir en la pagina. Usando las clases de bootstrap quedaria asi</p>
+<h3>app.component.html</h3>
+<pre>
+&lt;p>{{title}}&lt;/p> //Aqui usamos la interpolacion que ponemos entre llaves la propiedad y se imp´rime en el navegador
+</pre>
+</body>
+</html>

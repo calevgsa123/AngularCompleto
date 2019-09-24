@@ -26,6 +26,9 @@ h1,h2,h3,h4{
 h2::before{
 	content: "• ";
 }
+h3{
+	text-decoration: underline;
+}
 .ejemplo{
 	background-color:#06C;
 	border: 1px solid #000;
@@ -47,13 +50,24 @@ pre{
 }
 body{
 	padding:7px !important;
+	font-size: 25px;
+}
+p{
+	font-size: 25px;
 }
 .consola{
 	color:#fff;
 	background-color:#000;
 	font-family:"Courier New", Courier, monospace;
 	padding:30px;
-	font-size:12px;
+	font-size:18px;
+}
+.comando{
+	color:#fff;
+	background-color:#000;
+	font-family:"Courier New", Courier, monospace;
+	padding: 2px 5px;
+	border-radius: 5px;
 }
 td{
 	color:#000;
@@ -61,4 +75,8 @@ td{
 }
 li{
 	color:#fff;
+	font-size: 20px;
+}
+.resaltado{
+	background-color: yellow;
 }

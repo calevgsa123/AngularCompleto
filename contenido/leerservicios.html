@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Titulo</title>
+<link rel="stylesheet"  type="text/css" href="../css/bootstrap-4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet"  type="text/css" href="../css/style.css" />
+<script src="../js/jquery/jquery-3.1.1.min.js"></script>
+<script src="../css/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+<style>
+</style>
+</head>
+
+<body class="body-contenido">
+<h2>Leer servicios desde otros servicios</h2>
+<p>Usar un servicio desde otro servicio no es tan sencillo debemos injectar el servicio que usaremos</p>
+<h3>PersonasService.service.ts</h3>
+<pre>
+import { persona } from './persona.model';
+import { LoggingService } from './LoggingService.service';
+<span class="resaltado">import { Injectable } from '@angular/core';</span>
+
+<span class="resaltado">@Injectable()</span>
+export class PersonasService{
+  personas:persona[] = [new persona("Veronica","Hernandez"), new persona("Gisela", "Perez")];
+  
+  <span class="resaltado">constructor (private LoggingService:LoggingService){}</span>
+  onPersonaAgregada(event:persona){
+    <span class="resaltado">this.LoggingService.imprimirMensaje("Persona agregada " + event.nombre);</span>
+    this.personas.push(event);
+  }
+}
+</pre>
+<p>Debemos importar la clase Injectable y utilizarla arriba de la clase. En el contrstructor declaramos el servicio que vamos a usar y por ultimos lo llamamos usando this	</p>
+</body>
+</html>

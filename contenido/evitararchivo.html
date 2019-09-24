@@ -12,9 +12,13 @@
 </head>
 
 <body class="body-contenido">
-<h2></h2>
-<p></p>
+<h2>Evitar tener un archivo component.html</h2>
+<p>Podemos evitar tener un archivo component.html y para esto escribimos en codigo html en la seccion de template del decorador @component y eliminamos la parte de templateUrl y entre stiks se coloca el codigo</p>
 <pre>
+@component({
+    template: `<app-persona></app-persona>
+        {{titulo}}`
+})  
 </pre>
 </body>
 </html>

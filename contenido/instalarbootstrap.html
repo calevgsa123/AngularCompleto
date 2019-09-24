@@ -12,9 +12,25 @@
 </head>
 
 <body class="body-contenido">
-<h2></h2>
-<p></p>
+<h2>Instalar Bootstrap</h2>
+<p>Podemos instalar bootstrap, jquery y poper que son las herramientas basicas para trabajar una pagina html</p>
+<div class="consola">
+npm install bootstrap --save<br>
+npm install jquery --save<br>
+npm install popper.js --save <br>       
+</div>
+<p>Ahora devemos modificar el archivo: angular.json</p>
+<h3>angular.json</h3>
 <pre>
+"styles":[
+	"node_modules/bootstrap/dist/css/bootstrap.min.css"
+],
+"scripts": [
+	"node_modules/jquery/dist/jquery.slim.min.js",
+	"node_modules/popper.js/dist/umd/popper.min.js",
+	"node_modules/bootstrap/dist/js/bootstrap.min.js"
+]
+
 </pre>
 </body>
 </html>

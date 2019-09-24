@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Titulo</title>
+<link rel="stylesheet"  type="text/css" href="../css/bootstrap-4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet"  type="text/css" href="../css/style.css" />
+<script src="../js/jquery/jquery-3.1.1.min.js"></script>
+<script src="../css/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+<style>
+</style>
+</head>
+
+<body class="body-contenido">
+<h2>Actualizar datos de la base</h2>
+<p>Ahora vamos a actualizar la base de datos</p>
+<p>Es muy sencillo solo agregamos en el archivo dataservice la función</p>
+<h3>data.service.ts</h3>
+<pre>
+editarPersona(index:number,persona: persona){
+    let url: string = 'https://listado-personas-ad186.firebaseio.com/datos/' <span class="resaltado">+ index + '.json';</span>
+    this.HttpCliente.put(url,persona)
+    .subscribe(
+        response => console.log("Se modifico persona: " + response),
+        error => console.log("Error al modificar persona: " + error)
+    );
+}
+</pre>
+<p>Nota que concatenamos la url con el índice del dato que queremos actualizar</p>
+</body>
+</html>

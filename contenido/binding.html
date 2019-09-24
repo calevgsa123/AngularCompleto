@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Titulo</title>
+<link rel="stylesheet"  type="text/css" href="../css/bootstrap-4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet"  type="text/css" href="../css/style.css" />
+<script src="../js/jquery/jquery-3.1.1.min.js"></script>
+<script src="../css/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+<style>
+</style>
+</head>
+
+<body class="body-contenido">
+<h2>Property binding</h2>
+<p>Esto es similar al consepto de interpolacion solo que para usar el valor de una variable en una propiedad de un componente HTML devemos poner la propiedad en corchetes y el nombre de la barible entre comillas</p>
+<h3>App.component.ts</h3>
+<pre>
+import {Component} from '@angular/core';
+
+@Component({
+    selector: 'app-personas',
+    templateUrl: './personas.component.html'
+})
+
+export class PersonasComponent{
+    agregarPersona=true;// Agregamos en la declaración de la clase la variable que usamos para relacionar el boroton
+
+}
+</pre>
+<h3>app.component.html</h3>
+<pre>
+&lt;div class="container">
+    &lt;div class="row">
+        &lt;div class="col">
+            &lt;button [disabled]="agregarPersona">Agregar persona&lt;/button>
+        &lt;/div>
+    &lt;/div>
+&lt;/div>
+</pre>
+
+</body>
+</html>

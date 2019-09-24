@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Titulo</title>
+<link rel="stylesheet"  type="text/css" href="../css/bootstrap-4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet"  type="text/css" href="../css/style.css" />
+<script src="../js/jquery/jquery-3.1.1.min.js"></script>
+<script src="../css/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+<style>
+</style>
+</head>
+
+<body class="body-contenido">
+<h2>Directiva *ngFor</h2>
+<p>Esta directiva nos permite crear controles segun los valores de una variable de tipo array</p>
+<p>Primero creamos un archivo con el nombre persona.model.ts para crear una clase y ahí añadirle los elementos a iterar</p>
+<h3>persona.model.ts:</h3>
+<pre>
+export class persona{
+    constructor(public nombre:string,public apellido:string){
+        
+    }
+}
+</pre>
+<h3>app.component.ts</h3>
+<pre>
+import { Component } from '@angular/core';
+<span class="resaltado">import {persona} from './persona.model';</span>
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  titulo = 'Lista de personas';
+  <span class="resaltado">personas:persona[] = [new persona("Juan","Camaney"), new persona("Fabian", "Gonzales")];</span>
+  nombrePersona:string;
+  apellidoPersona:string;
+}
+</pre>
+<p>Despues de importar el modelo de persona creamos una variable de tipo array con dos elementos</p>
+<h3>app.component.html</h3>
+<pre>
+&lt;div *ngFor="let persona of personas; let i = index">
+    {{i+1}}.- {{persona.nombre}} {{persona.apellido}}
+&lt;/div> 
+</pre>
+<p>Ahora se crean varios elementos de tipo div segun la cantidad de elementos que tiene el array y usando el elemento de interpolacion para imprimir, nombre y apellido y usamos let index=index para obtener el indice del objeto</p>
+</body>
+</html>

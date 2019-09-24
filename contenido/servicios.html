@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Titulo</title>
+<link rel="stylesheet"  type="text/css" href="../css/bootstrap-4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet"  type="text/css" href="../css/style.css" />
+<script src="../js/jquery/jquery-3.1.1.min.js"></script>
+<script src="../css/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+<style>
+</style>
+</head>
+
+<body class="body-contenido">
+<h2>Servicios</h2>
+<p>Los servicios son como una especie de modulo global donde se comunicaran los componentes atravez de el. Para crear uno primero tenemos que crear un nuevo archivo LoggingService.service.ts</p>
+<h3>loggingService.service.ts</h3>
+<pre>
+export class LoggingService{
+    imprimirMensaje(mensaje:string){
+        console.log(mensaje);
+    }
+}
+</pre>
+<h3>formulario.component.ts</h3>
+<pre>
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { persona } from '../persona.model';
+import { LoggingService } from '../LoggingService.service';
+
+@Component({
+  selector: 'app-formulario',
+  templateUrl: './formulario.component.html',
+  styleUrls: ['./formulario.component.css']
+})
+export class FormularioComponent implements OnInit {
+  @Output()personaCreada = new EventEmitter<persona>();
+ /* nombrePersona:string;
+  apellidoPersona:string;*/
+
+  <span class="resaltado">constructor(private LoggingService:LoggingService) { }</span>
+
+  ngOnInit() {
+  }
+  onAgregarPersona(nombrePresona:HTMLInputElement, apellidoPersona:HTMLInputElement){
+   <span class="resaltado">this.LoggingService.imprimirMensaje("Se agrego una persona");</span>
+    this.personaCreada.emit(new persona(nombrePresona.value,apellidoPersona.value))
+  }
+}
+<p>Despues inyectamos el servicio en el contructor y lo utilizamos en la función on agregar persona</p>
+</pre>
+<p>Tambien debemos agregar el servicio en el archivo app.module.ts</p>
+<h3>app.module.ts</h3>
+<pre>
+<span class="resaltado">import { LoginService } from './login/login.service';</span>
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    PersonaComponent,
+    FormularioComponent
+  ],
+  imports: [
+    BrowserModule, FormsModule, AppRoutingModule,RouterModule,HttpClientModule
+  ],
+  <span class="resaltado">providers: [LoggingService],</span>
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+</pre>
+</body>
+</html>

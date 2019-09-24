@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Titulo</title>
+<link rel="stylesheet"  type="text/css" href="../css/bootstrap-4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet"  type="text/css" href="../css/style.css" />
+<script src="../js/jquery/jquery-3.1.1.min.js"></script>
+<script src="../css/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+<style>
+</style>
+</head>
+
+<body class="body-contenido">
+<h2>Rutas hijas(child route)</h2>
+<p>Con esto hacemos que los componentes se muestren en la misma pagina y no direccione a otra, que es uno de los objetivos de Angular ya que es SPA(single page aplicacion)</p>
+<p></p>
+<h3>app-routing.module.ts</h3>
+<pre>
+const routes: Routes = [
+  { path: '', component: PersonasComponent },
+  { path: 'personas', component: PersonasComponent, <span class="resaltado">children: [
+    { path: 'agregar', component: FormularioComponent },
+    { path: ':id', component: FormularioComponent},
+  ]</span>}
+]
+</pre>
+<p>De este modo agregamos a las rutas como hijas y se visualizaran en la misma pagina pero en este caso hay que agregar en el personas.component.html el router-outlet</p>
+<h3>personas.component.html</h3>
+<pre>
+&lt;button (click)="onAgregar()">Agregar&lt;/button>
+  &lt;div >
+    &lt;app-persona *ngFor="let personaArray of personas; let i = index"
+    [persona]="personaArray"
+    [index]="i"
+    >&lt;/app-persona>
+  &lt;/div> 
+  <span class="resaltado">&lt;router-outlet>&lt;/router-outlet></span>
+</pre>
+</body>
+</html>
